@@ -3,87 +3,103 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Имя Фамилия — сайт-визитка</title>
-  <meta name="description" content="Короткое описание: кто вы и чем занимаетесь." />
-
-  <!-- Open Graph / Twitter -->
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="Имя Фамилия — сайт-визитка" />
-  <meta property="og:description" content="Короткое описание: кто вы и чем занимаетесь." />
-  <meta property="og:image" content="./cover.jpg" />
-  <meta name="twitter:card" content="summary_large_image" />
-
-  <!-- Google Font -->
+  <title>Магазин · Три товара — Dark Neo</title>
+  <meta name="description" content="Современный лендинг для продажи трёх товаров. Быстрая корзина и оформление заказа.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Магазин · Три товара — Dark Neo">
+  <meta property="og:description" content="Современный лендинг для продажи трёх товаров.">
+  <meta property="og:image" content="./hero.jpg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;800&display=swap" rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&display=swap" rel="stylesheet">
   <style>
     :root{
-      --bg:#0b0c10; --card:#2b3460; --text:#e6e6e6; --muted:#a3a3a3; --accent:#6ee7b7; --ring:#17253d;
+      --bg:#0b0c10; --panel:#12131a; --card:#151827; --text:#e6e8ef; --muted:#9aa3b2;
+      --accent:#22d3ee; /* бирюза */
+      --accent-2:#7c3aed; /* фиолетовый */
+      --ring:#2563eb;
+      --success:#10b981; --danger:#ef4444;
     }
-    @media (prefers-color-scheme: light){
-      :root{ --bg:#fcfcfd; --card:#ffffff; --text:#101014; --muted:#6b7280; --accent:#10b981; --ring:#2563eb; }
-    }
-    *{ box-sizing:border-box }
-    html,body{ height:100% }
+    *{box-sizing:border-box}
+    html,body{height:100%}
     body{
       margin:0; font-family:'Manrope',system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif;
-      background:radial-gradient(1200px 600px at 80% -10%, rgba(110,231,183,.12), transparent),
-                 radial-gradient(900px 400px at 10% 110%, rgba(59,130,246,.10), transparent), var(--bg);
-      color:var(--text); line-height:1.6;
+      color:var(--text); background:
+        radial-gradient(1200px 600px at 80% -10%, rgba(34,211,238,.10), transparent),
+        radial-gradient(900px 400px at 10% 110%, rgba(124,58,237,.12), transparent),
+        var(--bg);
+      line-height:1.6;
     }
-    a{ color:inherit; text-decoration:none }
-    .container{ width:min(1100px, 92%); margin:0 auto; }
+    a{color:inherit; text-decoration:none}
+    img{max-width:100%; display:block}
+    .container{width:min(1120px,92%); margin:0 auto}
 
-    header{ position:sticky; top:0; backdrop-filter:saturate(120%) blur(8px);
-      background:color-mix(in srgb, var(--bg) 82%, transparent); border-bottom:1px solid rgba(255,255,255,.06); z-index:10 }
-    .nav{ display:flex; align-items:center; justify-content:space-between; padding:.9rem 0 }
-    .brand{ display:flex; gap:.75rem; align-items:center }
-    .avatar{ width:38px; height:38px; border-radius:50%; background:#222 url('avatar.jpg') center/cover no-repeat; box-shadow:0 0 0 2px rgba(255,255,255,.08) inset }
-    .name{ font-weight:800; letter-spacing:.2px }
-    .menu{ display:flex; gap:1rem; font-weight:600 }
-    .menu a{ opacity:.85 } .menu a:hover{ opacity:1 }
+    /* Header */
+    header{position:sticky; top:0; z-index:20; backdrop-filter:saturate(120%) blur(10px);
+      background:color-mix(in srgb, var(--bg) 82%, transparent); border-bottom:1px solid rgba(255,255,255,.06)}
+    .nav{display:flex; align-items:center; justify-content:space-between; padding:.9rem 0}
+    .brand{display:flex; gap:.8rem; align-items:center; font-weight:800}
+    .dot{width:12px;height:12px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent-2));box-shadow:0 0 0 3px rgba(255,255,255,.06) inset}
 
-    .hero{ display:grid; grid-template-columns: 1.1fr .9fr; gap:2rem; align-items:center; padding:5rem 0 3rem }
-    .title{ font-size:clamp(2rem, 4vw + .5rem, 3.25rem); line-height:1.15; font-weight:800; margin:0 0 .8rem }
-    .subtitle{ color:var(--muted); font-size:clamp(1rem, 1.2vw + .5rem, 1.25rem); margin:0 0 1.25rem }
-    .cta{ display:flex; gap:.8rem; flex-wrap:wrap }
-    .btn{ padding:.9rem 1.05rem; border-radius:14px; border:1px solid rgba(255,255,255,.1);
-      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)); font-weight:700 }
-    .btn:hover{ transform:translateY(-1px) }
-    .btn.primary{ background:linear-gradient(180deg, var(--accent), color-mix(in srgb, var(--accent) 70%, black)); color:#0b0c10; border:none }
-    .btn.primary:focus-visible{ outline:3px solid var(--ring) }
-    .hero .card{ background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)); padding:1rem;
-      border-radius:18px; border:1px solid rgba(255,255,255,.08); box-shadow:0 10px 40px rgba(0,0,0,.35) }
-    .hero img{ width:100%; height:auto; border-radius:14px }
+    /* Hero */
+    .hero{display:grid; grid-template-columns:1.1fr .9fr; gap:2rem; align-items:center; padding:3.2rem 0 2.4rem}
+    .title{font-size:clamp(2rem,4.2vw,3.2rem); line-height:1.15; margin:0 0 .7rem; font-weight:800}
+    .subtitle{color:var(--muted); margin:0 0 1.1rem}
+    .btn{display:inline-flex; align-items:center; gap:.5rem; padding:.9rem 1.1rem; border-radius:14px; font-weight:700; border:1px solid rgba(255,255,255,.1);
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)); cursor:pointer}
+    .btn:hover{transform:translateY(-1px)}
+    .btn.primary{background:linear-gradient(135deg,var(--accent),color-mix(in srgb,var(--accent-2) 70%, black)); color:#0b0c10; border:none}
+    .glass{background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)); padding:1rem; border-radius:18px; border:1px solid rgba(255,255,255,.08);
+      box-shadow:0 10px 40px rgba(0,0,0,.35)}
+    .glass img{border-radius:14px}
 
-    section{ padding:3rem 0; border-top:1px solid rgba(255,255,255,.06) }
-    h2{ font-size:1.6rem; margin:0 0 1rem; letter-spacing:.2px }
-    .grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:1rem }
-    .card{ background:var(--card); border:1px solid rgba(255,255,255,.06); border-radius:16px; padding:1rem }
-    .muted{ color:var(--muted) }
-    .proj{ display:flex; gap:1rem; align-items:flex-start }
-    .proj img{ width:100%; aspect-ratio:16/10; object-fit:cover; border-radius:12px }
-    .proj .stack{ font-size:.9rem; opacity:.9 }
-    footer{ padding:2rem 0; color:var(--muted); font-size:.95rem }
+    /* Products */
+    section{padding:2.6rem 0; border-top:1px solid rgba(255,255,255,.06)}
+    h2{margin:0 0 1rem; font-size:1.6rem}
+    .grid{display:grid; grid-template-columns:repeat(3,1fr); gap:1rem}
+    .card{background:var(--card); border:1px solid rgba(255,255,255,.08); border-radius:16px; padding:1rem; display:grid; gap:.8rem}
+    .price{font-weight:800; font-size:1.2rem}
+    .muted{color:var(--muted)}
+    .qty{display:flex; align-items:center; gap:.5rem}
+    .qty input{width:70px; padding:.5rem .6rem; border-radius:10px; border:1px solid rgba(255,255,255,.18); background:var(--panel); color:var(--text)}
+    .add{justify-content:center}
 
-    @media (max-width:900px){ .hero{ grid-template-columns:1fr; padding:3rem 0 2rem } .grid{ grid-template-columns:1fr 1fr } }
-    @media (max-width:640px){ .menu{ display:none } .grid{ grid-template-columns:1fr } }
+    /* Cart */
+    .cart{position:sticky; top:74px; align-self:start; background:var(--panel); border:1px solid rgba(255,255,255,.08);
+      border-radius:16px; padding:1rem; display:grid; gap:.6rem}
+    .cart h3{margin:0}
+    .cart-item{display:flex; align-items:center; justify-content:space-between; gap:.6rem; background:rgba(255,255,255,.02); padding:.5rem .6rem; border-radius:10px}
+    .cart small{color:var(--muted)}
+    .cart .rm{background:none; border:1px solid rgba(255,255,255,.18); color:var(--text); padding:.35rem .6rem; border-radius:8px; cursor:pointer}
+    .cart .rm:hover{border-color:rgba(255,255,255,.35)}
+    .total{display:flex; align-items:center; justify-content:space-between; margin-top:.4rem; font-weight:800}
+    .checkout{width:100%; justify-content:center}
+
+    /* Dialog */
+    dialog{border:none; border-radius:16px; padding:0; max-width:min(520px, 92%); background:var(--panel); color:var(--text)}
+    dialog::backdrop{background:rgba(0,0,0,.6)}
+    .dlg{padding:1rem; display:grid; gap:.6rem}
+    .field{display:grid; gap:.3rem}
+    .input{padding:.7rem .9rem; border-radius:12px; border:1px solid rgba(255,255,255,.18); background:var(--card); color:var(--text)}
+    .note{font-size:.95rem; color:var(--muted)}
+    .ok{background:linear-gradient(135deg,var(--accent),var(--accent-2)); color:#0b0c10; border:none}
+    .close{background:none}
+
+    /* Footer */
+    footer{padding:2rem 0; color:var(--muted); font-size:.95rem}
+
+    /* Responsive */
+    @media (max-width: 960px){ .hero{grid-template-columns:1fr} .grid{grid-template-columns:1fr 1fr} }
+    @media (max-width: 640px){ .grid{grid-template-columns:1fr} }
   </style>
 </head>
 <body>
   <!-- Header -->
   <header>
     <div class="container nav">
-      <div class="brand">
-        <div class="avatar" aria-hidden="true"></div>
-        <div class="name">Имя Фамилия</div>
-      </div>
+      <div class="brand"><span class="dot"></span> Dark Neo Shop</div>
       <nav class="menu" aria-label="Главное меню">
-        <a href="#about">Обо мне</a>
-        <a href="#projects">Проекты</a>
-        <a href="#contact">Контакты</a>
+        <a href="#catalog" class="btn">Каталог</a>
       </nav>
     </div>
   </header>
@@ -91,133 +107,256 @@
   <!-- Hero -->
   <div class="container hero">
     <div>
-      <h1 class="title">Помогаю бизнесам расти с помощью <span style="border-bottom:4px solid var(--accent)">веб-разработки</span></h1>
-      <p class="subtitle">Коротко о вашей ценности: разработка сайтов и лендингов, настройка аналитики, SEO и автоматизация. Работаю с малым бизнесом и личными брендами.</p>
+      <h1 class="title">Три продукта, один стиль — <span style="border-bottom:4px solid color-mix(in srgb,var(--accent) 70%, var(--accent-2))">Dark Neo</span></h1>
+      <p class="subtitle">Современный дизайн, быстрая корзина и удобная оплата заявкой. Доставим быстро — вы просто выбираете.</p>
       <div class="cta">
-        <a class="btn primary" href="#contact">Связаться со мной</a>
-        <a class="btn" href="#projects">Смотреть проекты</a>
+        <a class="btn primary" href="#catalog">Выбрать товар</a>
+        <a class="btn" href="#how">Как это работает</a>
       </div>
     </div>
-    <div class="card"><img src="cover.jpg" alt="Ваше фото/обложка проекта" /></div>
+    <div class="glass">
+      <img src="hero.jpg" alt="Обложка магазина (можно заменить на свою)">
+    </div>
   </div>
 
-  <!-- About -->
-  <section id="about">
+  <!-- Products + Cart -->
+  <section id="catalog">
     <div class="container">
-      <h2>Обо мне</h2>
-      <p class="muted">Пара предложений о себе: опыт, специализация, чем отличаетесь. Можно добавить заметные компании/клиентов или цифры.</p>
-      <div class="grid" style="margin-top:1rem">
-        <div class="card"><b>3+ года</b><br><span class="muted">опыта разработки</span></div>
-        <div class="card"><b>20+ проектов</b><br><span class="muted">лендинги, визитки, CRM</span></div>
-        <div class="card"><b>Core stack</b><br><span class="muted">HTML, CSS, JS, React</span></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Projects -->
-  <section id="projects">
-    <div class="container">
-      <h2>Проекты</h2>
+      <h2>Каталог</h2>
       <div class="grid">
-        <a class="card proj" href="#" target="_blank" rel="noopener">
-          <div style="width:100%">
-            <img src="project-1.jpg" alt="Скриншот проекта 1" />
-            <h3 style="margin:.6rem 0 0">Сдал контрольную у Галевского</h3>
-            <p class="muted">1–2 строки о задаче и результате: что сделали, какой был эффект.</p>
-            <div class="stack">HTML · CSS · JS</div>
+        <!-- ТОВАР 1 -->
+        <article class="card" data-id="p1" data-name="Товар №1" data-price="1990">
+          <img src="product-1.jpg" alt="Товар №1">
+          <div>
+            <h3>Товар №1</h3>
+            <p class="muted">Короткое описание. Расскажите про пользу в одном-двух предложениях.</p>
           </div>
-        </a>
-        <a class="card proj" href="#" target="_blank" rel="noopener">
-          <div style="width:100%">
-            <img src="project-2.jpg" alt="Скриншот проекта 2" />
-            <h3 style="margin:.6rem 0 0">Название проекта</h3>
-            <p class="muted">Короткое описание проекта, ссылка ведет на сайт или репозиторий.</p>
-            <div class="stack">React · Vite</div>
+          <div class="qty">
+            <span class="price">1 990&nbsp;₽</span>
+            <input type="number" min="1" value="1" inputmode="numeric" pattern="[0-9]*" aria-label="Количество">
+            <button class="btn add">В корзину</button>
           </div>
-        </a>
-        <a class="card proj" href="#" target="_blank" rel="noopener">
-          <div style="width:100%">
-            <img src="project-3.jpg" alt="Скриншот проекта 3" />
-            <h3 style="margin:.6rem 0 0">Название проекта</h3>
-            <p class="muted">Еще один проект — покажите разнообразие задач.</p>
-            <div class="stack">Next.js · Tailwind</div>
+        </article>
+
+        <!-- ТОВАР 2 -->
+        <article class="card" data-id="p2" data-name="Товар №2" data-price="3490">
+          <img src="product-2.jpg" alt="Товар №2">
+          <div>
+            <h3>Товар №2</h3>
+            <p class="muted">Короткое описание. Можно указать характеристики и комплектацию.</p>
           </div>
-        </a>
+          <div class="qty">
+            <span class="price">3 490&nbsp;₽</span>
+            <input type="number" min="1" value="1" inputmode="numeric" pattern="[0-9]*" aria-label="Количество">
+            <button class="btn add">В корзину</button>
+          </div>
+        </article>
+
+        <!-- ТОВАР 3 -->
+        <article class="card" data-id="p3" data-name="Товар №3" data-price="1290">
+          <img src="product-3.jpg" alt="Товар №3">
+          <div>
+            <h3>Товар №3</h3>
+            <p class="muted">Короткое описание. Укажите, чем он отличается от других.</p>
+          </div>
+          <div class="qty">
+            <span class="price">1 290&nbsp;₽</span>
+            <input type="number" min="1" value="1" inputmode="numeric" pattern="[0-9]*" aria-label="Количество">
+            <button class="btn add">В корзину</button>
+          </div>
+        </article>
+
+        <!-- CART (стики) -->
+        <aside class="cart card" id="cart">
+          <h3>Корзина</h3>
+          <div id="cart-items" class="muted">Пока пусто</div>
+          <div class="total"><span>Итого</span><span id="cart-total">0 ₽</span></div>
+          <button class="btn primary checkout" id="checkout" disabled>Оформить заказ</button>
+          <small class="muted">Нажимая на «Оформить заказ», вы подтверждаете согласие с обработкой персональных данных.</small>
+        </aside>
       </div>
     </div>
   </section>
 
-  <!-- Contact -->
-  <section id="contact">
+  <!-- How it works -->
+  <section id="how">
     <div class="container">
-      <h2>Контакты</h2>
-      <div class="card" style="display:grid; gap:1rem; padding:1.25rem">
-        <div style="display:flex; gap:1rem; flex-wrap:wrap">
-          <a class="btn" href="mailto:gma2004@bk.ru">gma2004@bk.ru</a>
-          <a class="btn" href="https://t.me/MaksimGaranin" target="_blank" rel="noopener">Telegram</a>
-          <a class="btn" href="https://vk.com/m.garanin" target="_blank" rel="noopener">VK</a>
-          <a class="btn" href="tel:+79818570474">+7 981 857-04-74</a>
-        </div>
-
-        <!-- ФОРМА: отправка на Formspree -->
-        <form id="contact-form" action="https://formspree.io/f/xvgwlejy" method="POST" style="display:grid; gap:.6rem">
-          <label>
-            Ваш e-mail
-            <input required type="email" name="email" placeholder="name@example.com"
-                   style="width:100%; padding:.8rem 1rem; border-radius:12px; border:1px solid rgba(255,255,255,.18); background:var(--card); color:var(--text)">
-          </label>
-          <label>
-            Сообщение
-            <textarea required name="message" rows="4" placeholder="Коротко опишите задачу"
-                      style="width:100%; padding:.8rem 1rem; border-radius:12px; border:1px solid rgba(255,255,255,.18); background:var(--card); color:var(--text)"></textarea>
-          </label>
-
-          <!-- антиспам-ловушка -->
-          <input type="text" name="_gotcha" style="display:none">
-
-          <button class="btn primary" type="submit">Отправить</button>
-          <p id="form-status" class="muted" role="status" aria-live="polite"></p>
-        </form>
+      <h2>Как это работает</h2>
+      <div class="grid" style="grid-template-columns:repeat(3,1fr)">
+        <div class="card"><b>1) Вы выбираете</b><br><span class="muted">Добавьте товары в корзину и укажите количество.</span></div>
+        <div class="card"><b>2) Оформляете заявку</b><br><span class="muted">Заполните контактные данные, мы пришлём детали на почту.</span></div>
+        <div class="card"><b>3) Оплата и доставка</b><br><span class="muted">Согласуем способ оплаты и отправим заказ.</span></div>
       </div>
     </div>
   </section>
 
   <footer>
-    <div class="container">
-      © <span id="year"></span> Имя Фамилия · Сделано с любовью к чистому коду
-    </div>
+    <div class="container">© <span id="year"></span> Dark Neo Shop · Сделано с заботой о деталях</div>
   </footer>
+
+  <!-- Checkout dialog -->
+  <dialog id="dlg">
+    <form class="dlg" id="order-form" method="POST" action="https://formspree.io/f/xvgwlejy">
+      <h3 style="margin:0">Оформление заказа</h3>
+      <p class="note" id="order-preview">Проверьте состав заказа ниже.</p>
+
+      <div class="field">
+        <label for="name">Ваше имя</label>
+        <input class="input" id="name" name="name" required placeholder="Иван Иванов">
+      </div>
+      <div class="field">
+        <label for="email">E-mail для связи</label>
+        <input class="input" id="email" type="email" name="email" required placeholder="name@example.com">
+      </div>
+      <div class="field">
+        <label for="phone">Телефон (опционально)</label>
+        <input class="input" id="phone" name="phone" placeholder="+7 999 000-00-00">
+      </div>
+      <div class="field">
+        <label for="msg">Комментарий к заказу</label>
+        <textarea class="input" id="msg" name="message" rows="3" placeholder="Пожелания по доставке и времени"></textarea>
+      </div>
+
+      <!-- сюда положим JSON-состав заказа и сумму -->
+      <input type="hidden" name="order" id="order-json">
+      <input type="hidden" name="total" id="order-total">
+
+      <div style="display:flex; gap:.6rem; justify-content:flex-end; margin-top:.4rem">
+        <button type="button" class="btn close" id="close-dlg">Отменить</button>
+        <button type="submit" class="btn ok">Отправить заявку</button>
+      </div>
+      <p class="note" id="form-status" aria-live="polite"></p>
+    </form>
+  </dialog>
 
   <script>
     // Текущий год
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Отправка формы через fetch (красивый статус без перезагрузки)
-    const form = document.getElementById('contact-form');
+    // --- Корзина ---
+    const cart = new Map(); // id -> {id,name,price,qty}
+    const fmt = n => new Intl.NumberFormat('ru-RU').format(n);
+
+    function renderCart(){
+      const box = document.getElementById('cart-items');
+      const totalEl = document.getElementById('cart-total');
+      const checkoutBtn = document.getElementById('checkout');
+
+      if(cart.size === 0){
+        box.innerHTML = '<span class="muted">Пока пусто</span>';
+        totalEl.textContent = '0 ₽';
+        checkoutBtn.disabled = true;
+        return;
+      }
+
+      const rows = [];
+      let total = 0;
+      cart.forEach(item => {
+        const sum = item.price * item.qty;
+        total += sum;
+        rows.push(`
+          <div class="cart-item">
+            <div>
+              <div>${item.name}</div>
+              <small>${item.qty} × ${fmt(item.price)} ₽</small>
+            </div>
+            <div>
+              <button class="rm" data-act="minus" data-id="${item.id}">–</button>
+              <button class="rm" data-act="plus" data-id="${item.id}">+</button>
+              <button class="rm" data-act="remove" data-id="${item.id}">×</button>
+            </div>
+          </div>
+        `);
+      });
+      box.innerHTML = rows.join('');
+      totalEl.textContent = fmt(total) + ' ₽';
+      checkoutBtn.disabled = false;
+    }
+
+    function addToCart(elCard, qty){
+      const id = elCard.dataset.id;
+      const name = elCard.dataset.name;
+      const price = Number(elCard.dataset.price);
+      const item = cart.get(id) || {id,name,price,qty:0};
+      item.qty += qty;
+      cart.set(id, item);
+      renderCart();
+    }
+
+    // Кнопки "В корзину"
+    document.querySelectorAll('.card .add').forEach(btn=>{
+      btn.addEventListener('click', e=>{
+        const card = e.target.closest('.card');
+        const qty = Math.max(1, parseInt(card.querySelector('input[type="number"]').value || '1', 10));
+        addToCart(card, qty);
+      });
+    });
+
+    // Кнопки внутри корзины
+    document.getElementById('cart').addEventListener('click', e=>{
+      if(!(e.target instanceof HTMLElement)) return;
+      const act = e.target.dataset.act;
+      const id = e.target.dataset.id;
+      if(!act || !id) return;
+      const it = cart.get(id);
+      if(!it) return;
+      if(act==='plus') it.qty++;
+      if(act==='minus') it.qty = Math.max(1, it.qty-1);
+      if(act==='remove') cart.delete(id);
+      renderCart();
+    });
+
+    // --- Оформление ---
+    const dlg = document.getElementById('dlg');
+    const checkoutBtn = document.getElementById('checkout');
+    const orderPreview = document.getElementById('order-preview');
+    const orderJSON = document.getElementById('order-json');
+    const orderTotal = document.getElementById('order-total');
+
+    checkoutBtn.addEventListener('click', ()=>{
+      // Сборка предпросмотра
+      let total = 0;
+      const arr = [];
+      cart.forEach(it=>{
+        total += it.price * it.qty;
+        arr.push({name: it.name, price: it.price, qty: it.qty});
+      });
+      orderJSON.value = JSON.stringify(arr);
+      orderTotal.value = total;
+
+      orderPreview.textContent = 'Ваш заказ: ' + arr.map(i => `${i.name} × ${i.qty}`).join(', ') + ` — на сумму ${fmt(total)} ₽`;
+      dlg.showModal();
+    });
+
+    document.getElementById('close-dlg').addEventListener('click', ()=> dlg.close());
+
+    // Отправка на Formspree с красивым статусом
+    const form = document.getElementById('order-form');
     const status = document.getElementById('form-status');
 
-    form.addEventListener('submit', async (e) => {
+    form.addEventListener('submit', async (e)=>{
       e.preventDefault();
       status.textContent = 'Отправляем...';
 
-      try {
-        const res = await fetch(form.action, {
-          method: 'POST',
-          body: new FormData(form),
-          headers: { 'Accept': 'application/json' }
-        });
-
-        if (res.ok) {
-          status.textContent = 'Спасибо! Сообщение отправлено.';
+      try{
+        const res = await fetch(form.action, { method:'POST', body: new FormData(form), headers:{'Accept':'application/json'} });
+        if(res.ok){
+          status.textContent = 'Спасибо! Заявка отправлена. Мы свяжемся с вами.';
           form.reset();
-        } else {
-          const err = await res.json().catch(() => ({}));
+          cart.clear();
+          renderCart();
+          setTimeout(()=>dlg.close(), 1200);
+        }else{
+          const err = await res.json().catch(()=>({}));
           status.textContent = err?.errors?.[0]?.message || 'Не получилось отправить. Попробуйте позже.';
         }
-      } catch {
+      }catch{
         status.textContent = 'Сетевая ошибка. Проверьте интернет и попробуйте ещё раз.';
       }
     });
+
+    // Первичный рендер корзины
+    renderCart();
   </script>
 </body>
 </html>
